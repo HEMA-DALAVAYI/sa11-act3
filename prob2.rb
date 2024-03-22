@@ -1,0 +1,30 @@
+'''
+Problem 2: Invoice Parser
+Objective: Create a Ruby program that parses a structured text containing multiple
+invoice entries and extracts key details from each entry.
+Task:
+•	Construct a Ruby script that processes a string with multiple lines, where each line represents
+ an invoice entry formatted as [Date] - [Invoice Number] - [Client Name] - [Amount].
+•	Extract the date, invoice number, client name, and amount from each line and display them in
+a structured format.
+'''
+
+def parse_invoices(invoice_data)
+  pattern = /(\d\d\d\d-\d\d-\d\d) - ([a-zA-z0-9]+) - ([a-zA-z\s]+) - \$([0-9,]+)/
+  puts(invoice_data.scan(pattern))
+  puts()
+
+  matches = invoice_data.scan(pattern)
+  matches.each do |date, invoice, name, amount|
+    puts "Date: #{date},Invoice Number: #{invoice},Client Name: #{name},Amount: $#{amount}"
+  end
+end
+
+
+invoice_entries = <<-INVOICES
+2023-03-01 - INV001 - Acme Corp - $1000
+2023-03-02 - INV002 - Beta LLC - $2050
+2023-03-03 - INV003 - Gamma Inc - $3500
+INVOICES
+
+parse_invoices(invoice_entries)
